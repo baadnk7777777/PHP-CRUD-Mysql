@@ -43,12 +43,13 @@
                     
                 ?>
                     <tr>
-                        <td><?php echo $row['isbn']; ?> </td>
-                        <td><?php echo $row['name']; ?> </td>
-                        <td><?php echo $row['author']; ?> </td>
-                        <td><?php echo $row['in_stock']; ?> </td>
-                        <td><?php echo $row['price']; ?> </td>
-                        <td><button  data-toggle="modal" data-target="#modalbookdetail"  class="btn btn-success detail " id="<?php  echo $row['user_id']?>" >Detail</button name ="btn-detail"> <button class="btn btn-success edit" data-toggle="modal" data-target="#modalbookedit"  id="<?php  echo $row['user_id']?>"  >Edit</button>  <button class="btn btn-success">Delete</button></td>
+                        <td class="isbn"><?php echo $row['isbn']; ?> </td>
+                        <td class="name" ><?php echo $row['name']; ?> </td>
+                        <td class="image" style="display:none"><?php echo $row['image']; ?> </td>
+                        <td class="author"><?php echo $row['author']; ?> </td>
+                        <td class="stock"><?php echo $row['in_stock']; ?> </td>
+                        <td class="price"><?php echo $row['price']; ?> </td>
+                        <td><button  data-toggle="modal" data-target="#modalbookdetail"  class="btn btn-success detail " id="<?php  echo $row['user_id']?>" >Detail</button name ="btn-detail"> <button class="btn btn-success edit" data-toggle="modal" data-target="#modalbookedit"  id="<?php  echo $row['user_id']?>"  >Edit</button>  <button class="btn btn-success Del_ID" name="Del_ID" value="<?php echo $row['user_id']?>">Delete</button></td>
                     </tr>
                 <?php
                     }
@@ -130,42 +131,45 @@
                     <div class="modal-body" id="bookeditmodalbody">
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtisbn" placeholder="ISBN" require>
+                                <input type="text" class="form-control " id="isbn" name="txtisbn" placeholder="ISBN" value="" readonly>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtnamebook" placeholder="Book Name"
-                                    require>
+                                <input type="text" class="form-control" id="name" name="txtnamebook" placeholder="Book Name"
+                                    >
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
+                            <input type="hidden" class="form-control" id="image" name="image" placeholder="image Name"
+                                    >
+                                    <p id="img-edit">asdasd</p>
                                 <input type="file" id="uploadimage" name="image">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtatname" placeholder="Author Name"
-                                    require>
+                                <input type="text" class="form-control" id="author" name="txtatname" placeholder="Author Name"
+                                    >
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtnis" placeholder="Number in Stock"
-                                    require>
+                                <input type="text" class="form-control" id="stock" name="txtnis" placeholder="Number in Stock"
+                                    >
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtprice" placeholder="Price" require>
+                                <input type="text" class="form-control" id="price" name="txtprice" placeholder="Price" >
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer" id="bookeditmodalfooter">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success" value="Upload">Add</button>
-                        <input type="text" class=""  id="user_id" value='' >
+                        <button type="submit" class="btn btn-success" id="Edit_re" >Update</button>
+                        <input type="hidden" class=""  id="user_id" value='' name="user_id" >
                     </div>
                 </form>
             </div>
@@ -176,8 +180,6 @@
     <div class="modal fade" id="modalbookdetail" tabindex="-1" role="dialog" aria-labelledby="modalLogin" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-
-                <form method="post" id="frmbookdetail" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Detail Book </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -186,46 +188,41 @@
                     </div>
                   
                     <div class="modal-body" id="bookdetailmodalbody">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtisbn" placeholder="ISBN" value="" readonly>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtnamebook" placeholder="Book Name" value=""
-                                    readonly>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="file" id="uploadimage" name="image" readonly>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtatname" placeholder="Author Name" value=""
-                                readonly>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtnis" placeholder="Number in Stock" value=""
-                                readonly>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="text" class="form-control" name="txtprice" placeholder="Price" value="" readonly >
-                            </div>
-                        </div>
+                      <p class="isbn-id"></p>
+                      <p class="name-id"></p>
+                      <p class="" id="img"></p>
+                      <p class="author-id"></p>
+                      <p class="stock-id"></p>
+                      <p class="price-id"></p>
                     </div>
                     <div class="modal-footer" id="bookdetailmodalfooter">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success" value="Upload">Add</button>
-                        <input type="text" class=""  id="userdetail_id" name="id_detail" value="" >
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <!-- <input type="text" class=""  id="userdetail_id" name="id_detail" value="" > -->
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- model delete  -->
+    <div class="modal fade" id="modalbookdelete" tabindex="-1" role="dialog" aria-labelledby="modalLogin" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Book </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                  
+                    <div class="modal-body" id="bookdeletemodalbody">
+                      Are you sure ?? ?
+                    </div>
+                    <div class="modal-footer" id="bookdeletemodalfooter">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" id="delete_re" >Delete</button>
+                        <!-- <input type="text" class=""  id="userdetail_id" name="id_detail" value="" > -->
+                    </div>
             </div>
         </div>
     </div>
@@ -242,6 +239,35 @@
 
     <script>
     $(document).ready(function(e) {
+
+        $('.Del_ID').click(function(e){
+            e.preventDefault();
+            console.log("DELTE");
+            var Delete_ID = $(this).attr('value');
+            console.log(Delete_ID);
+            $('#modalbookdelete').modal('show');
+
+            $('#delete_re').click(function(e){
+                console.log("dddd");
+
+                  $.ajax({
+                url : 'delete.php',
+                method: 'post',
+                // การใส่ data แบบระบุตัวแปล $_POST['Del_ID']
+                data : {Del_ID:Delete_ID},
+                success: function(data)
+                {
+                    console.log(data);
+                    $("#bookdeletemodalbody").html(data);
+                    var btnClose =
+                        ' <button type="submit" class="btn btn-danger" data-dismiss="modal">Close</button>'
+                    $("#bookdeletemodalfooter").html(btnClose);
+                }
+            });
+            });
+          
+        });
+
         $('#frmbook').on('submit', function(e) {
             console.log("onClick");
             e.preventDefault();
@@ -254,7 +280,7 @@
                 processData: false,
                 success: function(data) {
                     console.log(data);
-                    $("#bookdetailmodalbody").html(data);
+                    $("#bookmodalbody").html(data);
                     var btnClose =
                         ' <button type="submit" class="btn btn-danger" data-dismiss="modal">Close</button>'
                     $("#bookmodalfooter").html(btnClose);
@@ -268,24 +294,44 @@
         $('.edit').click(function(e) {
             e.preventDefault();
             console.log("tes");
-            $key = $(this).attr('id');
+            // $key = $(this).attr('id');
+            // $('#user_id').val($key);
+            
+            // ********************** set value ************************
+            $ISBN = $(this).closest("tr").find('.isbn').text();
+            $NAME = $(this).closest("tr").find('.name').text();
+            $IMG = $(this).closest("tr").find('.image').text();
+            $AUTHOR = $(this).closest("tr").find('.author').text();
+            $IN_STOCK = $(this).closest("tr").find('.stock').text();
+            $PRICE = $(this).closest("tr").find('.price').text();
+            console.log($ISBN);
+            console.log($NAME);
+            console.log($IMG);
+            console.log($AUTHOR);
+            console.log($IN_STOCK);
+            console.log($PRICE);
+
+            $('#isbn').val($ISBN);
+            $('#name').val($NAME);
+            $('#image').val($IMG);
+            $('#author').val($AUTHOR);
+            $('#stock').val($IN_STOCK);
+            $('#price').val($PRICE);
+            
+            $key =  $(this).attr('id');
             $('#user_id').val($key);
+
+            var number = $IMG;
+            $("#img-edit").html("<img class='img' src='uploads/"+$.trim(number)+"' width=50%' </img>");
             
 
         });
 
-        $('.detail').click(function(e) {
-            e.preventDefault();
-            console.log("detail");
-            $key = $(this).attr('id');
-            $('#userdetail_id').val($key);
-        });
-
-            $('#frmbookdetail').on('submit', function(e) {
+        $('#frmbookedit').on('submit', function(e) {
             console.log("onClick");
             e.preventDefault();
             $.ajax({
-                url: "detail.php",
+                url: "update.php",
                 type: "POST",
                 data: new FormData(this),
                 contentType: false,
@@ -293,21 +339,49 @@
                 processData: false,
                 success: function(data) {
                     console.log(data);
-                    $("#bookmodalbody").html(data);
+                    $("#bookeditmodalbody").html(data);
                     var btnClose =
                         ' <button type="submit" class="btn btn-danger" data-dismiss="modal">Close</button>'
-                    $("#bookdetailmodalfooter").html(btnClose);
+                    $("#bookeditmodalfooter").html(btnClose);
                 },
                 error: function(e) {
                     console.log(error);
                 }
             });
         });
-            
 
-        
+        $('.detail').click(function(e) {
+            e.preventDefault();
+            console.log("detail");
+            $key = $(this).attr('id');
+            $('#userdetail_id').val($key);
 
-        
+            $ISBN = $(this).closest("tr").find('.isbn').text();
+            $NAME = $(this).closest("tr").find('.name').text();
+            $IMG = $(this).closest("tr").find('.image').text();
+            $AUTHOR = $(this).closest("tr").find('.author').text();
+            $IN_STOCK = $(this).closest("tr").find('.stock').text();
+            $PRICE = $(this).closest("tr").find('.price').text();
+
+            console.log($ISBN);
+            console.log($NAME);
+            console.log($IMG);
+            console.log($AUTHOR);
+            console.log($IN_STOCK);
+            console.log($PRICE);
+
+            // set attribute
+
+            $('.isbn-id').text($ISBN);
+            $('.name-id').text($NAME);
+            $('.img-id').text($IMG);
+            $('.author-id').text($AUTHOR);
+            $('.stock-id').text($IN_STOCK);
+            $('.price-id').text($PRICE);
+
+            var number = $IMG;
+            $("#img").html("<img class='img' src='uploads/"+$.trim(number)+"' width=50%' </img>");
+        });
 
     });
 

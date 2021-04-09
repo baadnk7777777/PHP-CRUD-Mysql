@@ -33,21 +33,24 @@
             return $result;
         }
 
-        public function update($Isn,	$Name, $Image, $Author, $Instock,	$Price, $userid) {
-            $result = mysqli_query($this->dbcon, "UPDATE tblusers SET 
-                Name = '$Name',
-                Author = '$Author',
-                in_stock = '$In_stock',
-                Price = '$Price'
-                WHERE id = '$userid'
+        public function delete(){
+            $del_id = $_POST['Del_ID'];
+            $result = mysqli_query($this->dbcon,"DELETE FROM booking WHERE user_id = '$del_id' ");
+            return $result;
+        }
+
+        public function update($Isn,$Name, $Image, $Author, $Instock,$Price, $userid) {
+            $result = mysqli_query($this->dbcon, "UPDATE booking SET 
+                name = '$Name',
+                image = '$Image',
+                author = '$Author',
+                in_stock = '$Instock',
+                price = '$Price'
+                WHERE user_id = '$userid'
                 ");
                 return $result;
         }
 
-        public function delete ($userid) {
-            $deleterecord = mysqli_query($this->dbcon, "DELETE FROM tblusers WHERE id= '$userid' ");
-            return $deleterecord;
-        }
 
 
     }
